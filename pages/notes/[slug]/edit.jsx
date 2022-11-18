@@ -8,6 +8,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeHighlight from "rehype-highlight";
 import Button from "../../../components/Button";
 import StickyNavbar from "../../../components/StickyNavbar";
+import Loader from "../../../components/Loader";
 const Edit = () => {
   const [content, setContent] = useState(null);
   const [mdContent, setMdContent] = useState(null);
@@ -95,28 +96,36 @@ const Edit = () => {
           </div>
         </div>
       </StickyNavbar>
-
-      <div>
-        <div>
-          <input
-            type="text"
-            id="first_name"
-            className="bg-transparent border-none text-3xl focus:outline-none w-full mt-3"
-            placeholder="Title of your note..."
-            required
-            disabled={!raw}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+      {!note ? (
+        <div className="flex justify-center w-full h-[40vh] items-center ">
+          <Loader />
         </div>
-      </div>
-      <div className="mt-3">
-        {raw ? (
-          <Editor content={content} setContent={setContent} />
-        ) : (
-          <Mdx mdContent={mdContent} />
-        )}
-      </div>
+      ) : (
+        <>
+          <div>
+            <div>
+              <input
+                type="text"
+                id="first_name"
+                className="bg-transparent border-none text-3xl focus:outline-none w-full mt-3"
+                placeholder="Title of your note..."
+                required
+                disabled={!raw}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="mt-3">
+            {raw ? (
+              <Editor content={content} setContent={setContent} />
+            ) : (
+              <Mdx mdContent={mdContent} />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

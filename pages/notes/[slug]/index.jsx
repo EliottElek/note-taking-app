@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import StickyNavbar from "../../../components/StickyNavbar";
 import Modal from "../../../components/Modal";
+import Loader from "../../../components/Loader";
 const Slug = () => {
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState(null);
@@ -57,8 +58,16 @@ const Slug = () => {
         </Button>
       </StickyNavbar>
 
-      <h1>{note?.title}</h1>
-      <Mdx mdContent={mdContent} />
+      {!note ? (
+        <div className="flex justify-center w-full h-[40vh] items-center ">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          <h1>{note?.title}</h1>
+          <Mdx mdContent={mdContent} />
+        </>
+      )}
       <Modal
         open={open}
         setOpen={setOpen}
