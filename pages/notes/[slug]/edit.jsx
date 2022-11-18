@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Editor from "../../../components/Editor";
 import { supabase } from "../../../lib/supabase";
-import slugify from "react-slugify";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Mdx from "../../../components/Mdx";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeHighlight from "rehype-highlight";
+import Button from "../../../components/Button";
+import StickyNavbar from "../../../components/StickyNavbar";
 const Edit = ({ note, mdContentd }) => {
   const [content, setContent] = useState(note?.markdown);
   const [mdContent, setMdContent] = useState(mdContentd);
@@ -46,17 +48,24 @@ const Edit = ({ note, mdContentd }) => {
           tags: tagId,
         })
         .eq("id", note.id);
-      router.push("/");
+      router.push(`/notes/${note.slug}`);
     } catch (err) {}
   };
   return (
     <div className="p-4">
+      <StickyNavbar>
+        <Button onClick={saveNewPost}>Save post</Button>
+        <Button defaultbtn={true} onClick={saveNewPost}>
+          <Link href={`/notes/${note.slug}`}>Back</Link>
+        </Button>
+      </StickyNavbar>
+
       <div>
         <div>
           <input
             type="text"
             id="first_name"
-            class="bg-transparent border-none text-3xl focus:outline-none w-full"
+            className="bg-transparent border-none text-3xl focus:outline-none w-full mt-3"
             placeholder="Title of your note..."
             required
             value={title}
@@ -64,10 +73,10 @@ const Edit = ({ note, mdContentd }) => {
           />
         </div>
         <div>
-          <div className = "max-w-[200px] my-4">
+          <div className="max-w-[200px] my-4">
             <label
               for="countries_disabled"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Select tags
             </label>
@@ -75,7 +84,7 @@ const Edit = ({ note, mdContentd }) => {
               onChange={handleChange}
               placeholder="Choose a tag"
               id="countries_disabled"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               {tags?.map((tag) => (
                 <option value={tag.id} key={tag.id}>
@@ -87,13 +96,7 @@ const Edit = ({ note, mdContentd }) => {
         </div>
       </div>
       <Editor content={content} setContent={setContent} />
-      <button
-        onClick={saveNewPost}
-        type="submit"
-        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
-      >
-        Save post
-      </button>
+
       <Mdx mdContent={mdContent} />
     </div>
   );
@@ -109,7 +112,7 @@ export async function getStaticPaths() {
     });
     return {
       paths: paths,
-      fallback: false, // can also be true or 'blocking'
+      fallback: "blocking", // can also be true or 'blocking'
     };
   } catch (err) {}
 }
@@ -130,6 +133,7 @@ export async function getStaticProps(context) {
     return {
       // Passed to the page component as props
       props: { note: data, mdContentd: mdxSource },
+      revalidate: 100,
     };
   } catch (err) {}
 }

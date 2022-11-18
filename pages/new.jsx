@@ -8,6 +8,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeHighlight from "rehype-highlight";
 import Button from "../components/Button";
 import Link from "next/link";
+import StickyNavbar from "../components/StickyNavbar";
 const New = () => {
   const [content, setContent] = useState("");
   const [mdContent, setMdContent] = useState(null);
@@ -39,6 +40,7 @@ const New = () => {
   }, [setMdContent, content]);
 
   const createNewPost = async () => {
+    if (title === "") return;
     try {
       await supabase.from("notes").insert({
         markdown: content,
@@ -51,12 +53,20 @@ const New = () => {
   };
   return (
     <div className="p-4">
-      <div>
+      <StickyNavbar>
+        <div className="flex">
+          <Button onClick={createNewPost}>Publish post</Button>
+          <Link href="/">
+            <Button defaultbtn={true}>Cancel</Button>
+          </Link>
+        </div>
+      </StickyNavbar>
+      <div className="mt-2">
         <div>
           <input
             type="text"
             id="first_name"
-            class="bg-transparent border-none text-3xl focus:outline-none"
+            class="bg-transparent border-none  text-3xl focus:outline-none"
             placeholder="Title of your note..."
             required
             value={title}
@@ -64,7 +74,7 @@ const New = () => {
           />
         </div>
         <div>
-          <div className = "max-w-[200px] my-4">
+          <div className="max-w-[200px] my-4">
             <label
               for="countries_disabled"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -87,12 +97,6 @@ const New = () => {
         </div>
       </div>
       <Editor content={content} setContent={setContent} />
-      <div className="flex gaap-3">
-        <Button onClick={createNewPost}>Publish post</Button>
-        <Link href="/">
-          <Button defaultBtn>Cancel</Button>
-        </Link>
-      </div>
       <Mdx mdContent={mdContent} />
     </div>
   );

@@ -23,14 +23,15 @@ a {
     color-scheme: dark;
   }
   body {
-    @apply p-10 dark:bg-slate-800 bg-gray-300;
+    @apply p-0 dark:bg-slate-800 bg-gray-300;
   }
 }
 .main__grid {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
-  padding: 12px;
+  margin-top: 12px;
 }
 h1,
 h2,
