@@ -133,7 +133,7 @@ export async function getStaticProps(context) {
     return {
       // Passed to the page component as props
       props: { note: data, mdContentd: mdxSource },
-      revalidate: 100,
+      revalidate: 1,
     };
   } catch (err) {}
 }
