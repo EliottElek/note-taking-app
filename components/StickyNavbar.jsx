@@ -6,8 +6,8 @@ const StickyNavbar = ({ children }) => {
   const [colorTheme, setTheme] = useDarkMode();
 
   return (
-    <div className="sticky z-10 p-3 pb-0 pt-4 top-0 left-0 right-0 flex items-center dark:bg-slate-700 bg-gray-100 border-b dark:border-b-slate-600 justify-between ">
-      {children}
+    <div className="sticky z-10 p-3 pb-0 pt-4 top-0 left-0 right-0 flex items-center dark:bg-slate-700 bg-gray-100 border-b dark:border-b-slate-600 justify-end md:justify-between">
+      <div className="flex-grow hidden md:flex">{children}</div>
       <div className="flex items-center px-5 pb-4">
         {colorTheme === "light" ? (
           <button

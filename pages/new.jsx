@@ -64,7 +64,7 @@ const New = () => {
           <Button onClick={createNewPost}>Publish note</Button>
         </div>
       </StickyNavbar>
-      <div className="mt-2 p-10 text-lg">
+      <div className="mt-2 md:p-10 p-4 text-lg">
         <div>
           <input
             type="text"
