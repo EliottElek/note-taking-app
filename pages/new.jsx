@@ -31,10 +31,12 @@ const New = () => {
 
   useEffect(() => {
     const serializeMarkdown = async () => {
-      const mdxSource = await serialize(content, {
-        mdxOptions: { rehypePlugins: [rehypeHighlight] },
-      });
-      setMdContent(mdxSource);
+      try {
+        const mdxSource = await serialize(content, {
+          mdxOptions: { rehypePlugins: [rehypeHighlight] },
+        });
+        setMdContent(mdxSource);
+      } catch (err) {}
     };
     serializeMarkdown();
   }, [setMdContent, content]);
@@ -66,7 +68,7 @@ const New = () => {
           <input
             type="text"
             id="first_name"
-            class="bg-transparent border-none  text-3xl focus:outline-none"
+            class="bg-transparent border-none  text-3xl focus:outline-none my-4"
             placeholder="Title of your note..."
             required
             value={title}
@@ -74,7 +76,7 @@ const New = () => {
           />
         </div>
         <div>
-          <div className="max-w-[200px] my-4">
+          {/* <div className="max-w-[200px] my-4">
             <label
               for="countries_disabled"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -93,7 +95,7 @@ const New = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
       <Editor content={content} setContent={setContent} />

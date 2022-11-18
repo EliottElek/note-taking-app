@@ -54,10 +54,7 @@ const CopyToClipBoard = ({ textRef }) => {
 const Pre = ({ children }) => {
   const textInput = useRef(null);
   return (
-    <pre
-      className="dark:bg-gray-800 bg-gray-100  rounded-lg my-2 mt-4 relative "
-      ref={textInput}
-    >
+    <pre className="rounded-lg my-2 mt-4 relative" ref={textInput}>
       {children}
       <CopyToClipBoard textRef={textInput} />
     </pre>
