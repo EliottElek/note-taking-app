@@ -25,7 +25,8 @@ const StickyNavbar = ({ children }) => {
           </button>
         )}
         <a
-        href= "https://github.com/eliottelek/note-taking-app"
+          href="https://github.com/eliottelek/note-taking-app"
+          rel="noreferrer"
           target="_blank"
           className="flex items-center text-2xl gap-2 dark:text-gray-100 px-3 py-2 rounded-lg cursor-pointer dark:hover:text-green-500 hover:text-green-500 ease-in duration-100"
         >
