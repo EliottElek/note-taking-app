@@ -45,7 +45,7 @@ const CopyToClipBoard = ({ textRef }) => {
         className="text-slate-200 h-6 w-6 absolute top-2 right-2"
         onClick={copyToClipBoard}
       >
-        <DocumentDuplicateIcon className="dark:text-slate-200 text-gray-700 opacity-30 hover:opacity-100 duration-75" />
+        <DocumentDuplicateIcon className="text-slate-200 opacity-30 hover:opacity-100 duration-75" />
       </button>
     </>
   );
