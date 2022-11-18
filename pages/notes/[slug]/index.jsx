@@ -44,19 +44,47 @@ const Slug = () => {
     };
     loadNote();
   }, [setNote, setMdContent, router]);
+  const exportToMd = () => {
+    const fileData = note.markdown;
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = note.slug + ".md";
+    link.href = url;
+    link.click();
+  };
+  const exportToHtml = () => {
+    const fileData = mdContent;
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = note.slug + ".html";
+    link.href = url;
+    link.click();
+  };
   return (
     <div className="relative">
       <StickyNavbar>
-        <div className="pb-4">
-          <Link href="/">
-            <Button defaultbtn={true}>Back</Button>
-          </Link>
-          <Link href={router.asPath + "/edit"}>
-            <Button>Edit</Button>
-          </Link>
-          <Button onClick={() => setOpen(true)} deletebtn={true}>
-            Delete
-          </Button>
+        <div className="pb-4 flex w-full items-center justify-between ">
+          <div>
+            <Link href="/">
+              <Button defaultbtn={true}>Back</Button>
+            </Link>
+            <Link href={router.asPath + "/edit"}>
+              <Button>Edit</Button>
+            </Link>
+            <Button onClick={() => setOpen(true)} deletebtn={true}>
+              Delete
+            </Button>
+          </div>
+          <div>
+            <Button onClick={exportToMd} defaultbtn={true}>
+              Export to markdown
+            </Button>
+            {/* <Button onClick={exportToHtml} defaultbtn={true}>
+              Export to HTML
+            </Button> */}
+          </div>
         </div>
       </StickyNavbar>
 
