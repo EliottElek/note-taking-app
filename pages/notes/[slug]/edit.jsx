@@ -9,6 +9,7 @@ import rehypeHighlight from "rehype-highlight";
 import Button from "../../../components/Button";
 import StickyNavbar from "../../../components/StickyNavbar";
 import Loader from "../../../components/Loader";
+import slugify from "react-slugify";
 const Edit = () => {
   const [content, setContent] = useState(null);
   const [mdContent, setMdContent] = useState(null);
@@ -65,26 +66,28 @@ const Edit = () => {
   }, [setNote, setMdContent, setTitle, router]);
   const saveNewPost = async () => {
     try {
+      const slug = slugify(title);
       await supabase
         .from("notes")
         .update({
           markdown: content,
           title: title,
           tags: tagId,
+          slug: slug,
         })
         .eq("id", note.id);
-      router.push(`/notes/${note?.slug}`);
+      router.push(`/notes/${slug}`);
     } catch (err) {}
   };
   return (
-    <div className="p-4">
+    <div>
       <StickyNavbar>
         <div className="flex flex-col">
           <div>
             <Button defaultbtn={true} onClick={saveNewPost}>
               <Link href={`/notes/${note?.slug}`}>Back</Link>
             </Button>
-            <Button onClick={saveNewPost}>Save post</Button>
+            <Button onClick={saveNewPost}>Save note</Button>
           </div>
           <div className="flex gap-2 items-center mt-4">
             <Tab active={raw} onClick={() => setRaw(true)}>
@@ -101,7 +104,7 @@ const Edit = () => {
           <Loader />
         </div>
       ) : (
-        <>
+        <div className="p-10">
           <div>
             <div>
               <input
@@ -124,7 +127,7 @@ const Edit = () => {
               <Mdx mdContent={mdContent} />
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

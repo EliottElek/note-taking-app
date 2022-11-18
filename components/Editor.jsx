@@ -9,8 +9,7 @@ const Editor = ({ content, setContent }) => {
         <resizable-textarea>
           <textarea
             id="editor"
-            resiz
-            className="block text-lg w-full focus:outline-none px-0 text-gray-800  border-none bg-transparent dark:text-white dark:placeholder-gray-400"
+            className="block text-lg w-full focus:outline-none text-gray-800  border-none bg-transparent dark:text-white dark:placeholder-gray-400"
             placeholder="Write your content here (markdown supported)"
             required
             ref={ref}

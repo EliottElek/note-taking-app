@@ -29,13 +29,14 @@ a {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
   margin-top: 12px;
+  padding: 20px;
 }
 h1,
 h2,
 h3,
 h4,
 h5 {
-  @apply font-semibold my-2 mt-8;
+  @apply font-semibold my-2 mt-0;
 }
 h1 {
   @apply text-3xl;
@@ -53,5 +54,5 @@ h5 {
   @apply text-sm;
 }
 .hljs {
-  @apply rounded-md  opacity-100 ;
+  @apply rounded-md  opacity-100;
 }

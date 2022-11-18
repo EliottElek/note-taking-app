@@ -45,17 +45,19 @@ const Slug = () => {
     loadNote();
   }, [setNote, setMdContent, router]);
   return (
-    <div className="relative p-10">
+    <div className="relative">
       <StickyNavbar>
-        <Link href="/">
-          <Button defaultbtn={true}>Back</Button>
-        </Link>
-        <Link href={router.asPath + "/edit"}>
-          <Button>Edit</Button>
-        </Link>
-        <Button onClick={() => setOpen(true)} deletebtn={true}>
-          Delete
-        </Button>
+        <div className="pb-4">
+          <Link href="/">
+            <Button defaultbtn={true}>Back</Button>
+          </Link>
+          <Link href={router.asPath + "/edit"}>
+            <Button>Edit</Button>
+          </Link>
+          <Button onClick={() => setOpen(true)} deletebtn={true}>
+            Delete
+          </Button>
+        </div>
       </StickyNavbar>
 
       {!note ? (
@@ -63,10 +65,10 @@ const Slug = () => {
           <Loader />
         </div>
       ) : (
-        <>
+        <div className="p-10">
           <h1>{note?.title}</h1>
           <Mdx mdContent={mdContent} />
-        </>
+        </div>
       )}
       <Modal
         open={open}
