@@ -11,9 +11,9 @@ const StickyNavbar = ({ children }) => {
     <div className="sticky pl-10 z-10 p-3 pb-0 pt-4 top-0 left-0 right-0 flex items-center dark:bg-slate-700 bg-gray-100 border-b dark:border-b-slate-600 justify-end md:justify-between">
       <div className="flex-grow hidden md:flex ">{children}</div>
       <div className="md:hidden flex flex-grow m-0 absolute left-0 ml-4 top-[50%] -translate-y-1/2">
-        <Button defaultbtn={true}>
-          <Link href="/">Home</Link>
-        </Button>
+        <Link href="/">
+          <Button defaultbtn={true}>Home</Button>
+        </Link>
       </div>
       <div className="flex items-center px-5 pb-4">
         {colorTheme === "light" ? (
