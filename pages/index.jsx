@@ -33,19 +33,19 @@ export default function Home() {
         </div>
       </StickyNavbar>
 
-      <main className={"main__grid"}>
-        {!notes ? (
-          <div className="flex justify-center w-screen items-center">
-            <Loader />
-          </div>
-        ) : (
-          notes?.map((note) => (
+      {!notes ? (
+        <div className="flex justify-center mt-10 items-center">
+          <Loader />
+        </div>
+      ) : (
+        <main className={"main__grid"}>
+          {notes?.map((note) => (
             <Link key={note.id} href={`/notes/${note.slug}`}>
               <Card note={note} />
             </Link>
-          ))
-        )}
-      </main>
+          ))}
+        </main>
+      )}
     </div>
   );
 }
