@@ -16,6 +16,8 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu;
 }
 
 @media (prefers-color-scheme: dark) {

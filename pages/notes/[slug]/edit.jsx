@@ -10,6 +10,7 @@ import Button from "../../../components/Button";
 import StickyNavbar from "../../../components/StickyNavbar";
 import Loader from "../../../components/Loader";
 import slugify from "react-slugify";
+import shortid from "shortid";
 import Head from "next/head";
 const Edit = () => {
   const [content, setContent] = useState(null);
@@ -67,7 +68,7 @@ const Edit = () => {
   }, [setNote, setMdContent, setTitle, router]);
   const saveNewPost = async () => {
     try {
-      const slug = slugify(title);
+      const slug = slugify(title) + shortid.generate();
       await supabase
         .from("notes")
         .update({

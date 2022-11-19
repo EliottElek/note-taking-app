@@ -8,6 +8,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeHighlight from "rehype-highlight";
 import Button from "../components/Button";
 import Link from "next/link";
+import shortid from "shortid";
 import StickyNavbar from "../components/StickyNavbar";
 const New = () => {
   const [content, setContent] = useState("");
@@ -44,7 +45,7 @@ const New = () => {
   const createNewPost = async () => {
     if (title === "") return;
     try {
-      const slug = slugify(title);
+      const slug = slugify(title) + shortid.generate();
       await supabase.from("notes").insert({
         markdown: content,
         title: title,
