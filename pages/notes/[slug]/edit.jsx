@@ -19,6 +19,7 @@ const Edit = () => {
   const [note, setNote] = useState(null);
   const [title, setTitle] = useState();
   const [tagId, setTagId] = useState(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const [tags, setTags] = useState([]);
@@ -67,6 +68,7 @@ const Edit = () => {
     loadNote();
   }, [setNote, setMdContent, setTitle, router]);
   const saveNewPost = async () => {
+    setLoading(true);
     try {
       const slug = slugify(title) + shortid.generate();
       await supabase
@@ -78,7 +80,7 @@ const Edit = () => {
           slug: slug,
         })
         .eq("id", note.id);
-      router.push(`/notes/${slug}`);
+      setLoading(false);
     } catch (err) {}
   };
   return (
@@ -92,12 +94,14 @@ const Edit = () => {
         <div className="flex flex-col">
           <div className="flex items-center">
             <Link href={`/notes/${note?.slug}`}>
-              <Button defaultbtn={true} onClick={saveNewPost}>
+              <Button defaultbtn={true}>
                 <ChevronLeftIcon className="h-4 w-4" />
                 Back
               </Button>
             </Link>
-            <Button onClick={saveNewPost}>Save note</Button>
+            <Button onClick={saveNewPost}>
+              {loading ? "Saving..." : "Save note"}
+            </Button>
           </div>
         </div>
       </StickyNavbar>

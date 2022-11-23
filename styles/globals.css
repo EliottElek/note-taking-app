@@ -64,3 +64,6 @@ ul {
 code {
   @apply bg-gray-300 dark:bg-gray-600 rounded-md px-1;
 }
+blockquote{
+  @apply border-l-4 pl-2 mt-2;
+}
