@@ -11,6 +11,8 @@ import Modal from "../../../components/Modal";
 import Loader from "../../../components/Loader";
 import Head from "next/head";
 import SpeedDial from "../../../components/SpeedDial";
+import { FiEdit } from "react-icons/fi";
+import { ChevronLeftIcon, TrashIcon } from "@heroicons/react/24/outline";
 const Slug = () => {
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState(null);
@@ -79,24 +81,26 @@ const Slug = () => {
       <div className="relative">
         <StickyNavbar>
           <div className="pb-4 flex w-full items-center justify-between ">
-            <div>
+            <div className="flex">
               <Link href="/">
-                <Button defaultbtn={true}>Back</Button>
+                <Button defaultbtn={true}>
+                  <ChevronLeftIcon className="h-4 w-4" />
+                  Back
+                </Button>
               </Link>
               <Link href={router.asPath + "/edit"}>
-                <Button>Edit</Button>
+                <Button defaultbtn={true}>
+                  Edit <FiEdit />
+                </Button>
               </Link>
               <Button onClick={() => setOpen(true)} deletebtn={true}>
-                Delete
+                Delete <TrashIcon className="h-4 w-4" />
               </Button>
             </div>
             <div>
               <Button onClick={exportToMd} defaultbtn={true}>
                 Export to markdown
               </Button>
-              {/* <Button onClick={exportToHtml} defaultbtn={true}>
-              Export to HTML
-            </Button> */}
             </div>
           </div>
         </StickyNavbar>

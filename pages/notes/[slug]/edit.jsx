@@ -11,6 +11,7 @@ import StickyNavbar from "../../../components/StickyNavbar";
 import Loader from "../../../components/Loader";
 import slugify from "react-slugify";
 import shortid from "shortid";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 const Edit = () => {
   const [content, setContent] = useState(null);
@@ -18,7 +19,6 @@ const Edit = () => {
   const [note, setNote] = useState(null);
   const [title, setTitle] = useState();
   const [tagId, setTagId] = useState(null);
-  const [raw, setRaw] = useState(true);
   const router = useRouter();
 
   const [tags, setTags] = useState([]);
@@ -90,19 +90,14 @@ const Edit = () => {
       </Head>
       <StickyNavbar>
         <div className="flex flex-col">
-          <div>
-            <Button defaultbtn={true} onClick={saveNewPost}>
-              <Link href={`/notes/${note?.slug}`}>Back</Link>
-            </Button>
+          <div className="flex items-center">
+            <Link href={`/notes/${note?.slug}`}>
+              <Button defaultbtn={true} onClick={saveNewPost}>
+                <ChevronLeftIcon className="h-4 w-4" />
+                Back
+              </Button>
+            </Link>
             <Button onClick={saveNewPost}>Save note</Button>
-          </div>
-          <div className="flex gap-2 items-center mt-4">
-            <Tab active={raw} onClick={() => setRaw(true)}>
-              Raw
-            </Tab>
-            <Tab active={!raw} onClick={() => setRaw(false)}>
-              Preview
-            </Tab>
           </div>
         </div>
       </StickyNavbar>
@@ -120,7 +115,6 @@ const Edit = () => {
                 className="bg-transparent border-none text-3xl focus:outline-none w-full mt-3"
                 placeholder="Title of your note..."
                 required
-                disabled={!raw}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -128,11 +122,9 @@ const Edit = () => {
           </div>
 
           <div className="mt-3">
-            {raw ? (
-              <Editor content={content} setContent={setContent} />
-            ) : (
-              <Mdx mdContent={mdContent} />
-            )}
+            <Editor content={content} setContent={setContent} />
+            <div className="w-full border-b my-3 dark:border-b-slate-600" />
+            <Mdx mdContent={mdContent} />
           </div>
         </div>
       )}

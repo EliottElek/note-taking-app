@@ -58,3 +58,9 @@ h5 {
 .hljs {
   @apply rounded-md  opacity-100;
 }
+ul {
+  list-style: disc;
+}
+code {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-md px-1;
+}

@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import StickyNavbar from "../components/StickyNavbar";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FiEdit } from "react-icons/fi";
 export default function Home() {
   const [notes, setNotes] = useState(null);
 
@@ -28,7 +29,9 @@ export default function Home() {
       <StickyNavbar>
         <div className="pb-4">
           <Link href="/new">
-            <Button>Add a new note</Button>
+            <Button defaultbtn={true}>
+              Add a new note <FiEdit />
+            </Button>
           </Link>
         </div>
       </StickyNavbar>
