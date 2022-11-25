@@ -10,7 +10,7 @@ export default function Modal({
   onValidate,
   title,
   children,
-  s,
+  displayOnly,
 }) {
   const cancelButtonRef = useRef(null);
 
@@ -45,19 +45,13 @@ export default function Modal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-gray-700 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-gray-600 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <ExclamationTriangleIcon
-                        className="h-6 w-6 text-red-600"
-                        aria-hidden="true"
-                      />
-                    </div>
+              <Dialog.Panel className="relative transform rounded-lg  text-left shadow-xl transition-all max-w-[90%] sm:my-8 sm:w-full sm:max-w-lg">
+                <div className="bg-gray-200 dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
+                        className="text-xl font-medium leading-6 dark:text-gray-100"
                       >
                         {title}
                       </Dialog.Title>
@@ -65,14 +59,16 @@ export default function Modal({
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-700 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <Button deletebtn={true} onClick={onValidate}>
-                    Validate
-                  </Button>
-                  <Button defaultbtn={true} onClick={onCancel}>
-                    Cancel
-                  </Button>
-                </div>
+                {!displayOnly && (
+                  <div className="bg-gray-700 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <Button deletebtn={true} onClick={onValidate}>
+                      Validate
+                    </Button>
+                    <Button defaultbtn={true} onClick={onCancel}>
+                      Cancel
+                    </Button>
+                  </div>
+                )}
               </Dialog.Panel>
             </Transition.Child>
           </div>

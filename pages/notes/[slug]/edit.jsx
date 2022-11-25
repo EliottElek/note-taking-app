@@ -13,6 +13,7 @@ import slugify from "react-slugify";
 import shortid from "shortid";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
+import { useKey } from "../../../lib/saveOnCtrlS";
 const Edit = () => {
   const [content, setContent] = useState(null);
   const [mdContent, setMdContent] = useState(null);
@@ -83,6 +84,8 @@ const Edit = () => {
       setLoading(false);
     } catch (err) {}
   };
+  useKey("ctrls", saveNewPost);
+
   return (
     <div>
       <Head>

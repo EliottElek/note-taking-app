@@ -43,9 +43,7 @@ export default function Home() {
       ) : (
         <main className={"main__grid"}>
           {notes?.map((note) => (
-            <Link key={note.id} href={`/notes/${note.slug}`}>
-              <Card note={note} />
-            </Link>
+            <Card key={note.id} note={note} />
           ))}
         </main>
       )}
